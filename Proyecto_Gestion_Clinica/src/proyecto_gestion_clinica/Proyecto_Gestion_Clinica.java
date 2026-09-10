@@ -22,8 +22,9 @@ public class Proyecto_Gestion_Clinica {
 //==== VARIABLES
      int opcionMenu = 0;
      int opcionSubmenu = 0;
+     int centinelaMenu = 7;
      //paciente
-     int cantidadPaciente = 0;
+     int cantidadRegistro = 0;
      String nombrePaciente ="John Doe";
      String apellidoPaciente = "John Doe";
      char generoPaciente = 'a';
@@ -51,19 +52,22 @@ public class Proyecto_Gestion_Clinica {
          System.out.println(" 6. Gestion de Pagos");
          System.out.println(" 7. Salir");
          System.out.print("Seleccione una opcion:");
-         opcionMenu = sc.nextInt();
-         System.out.println("");
+         opcionMenu = ValiacionNumeroPositivo(sc);
+         
          
         switch(opcionMenu){
             case 1: 
                 Encabezados("Gestion de Medicos");
                 System.out.println(" 1. Registro de Medico");
                 System.out.println(" 2. Buscar Medico");
-                System.out.println("Seleccione una opcion:");
-                opcionSubmenu = sc.nextInt();
+                System.out.print("Seleccione una opcion:");
+                opcionSubmenu = ValiacionNumeroPositivo(sc);
                 switch(opcionSubmenu){
         //====== REGISTRO DE MEDICOS =======
-                    case 1: 
+            case 1: 
+                Encabezados("Gestion de Medicos");
+                System.out.println(" 1. Registro de Pacientes");
+                System.out.println(" 2. Buscar Paciente");
                 }//fin switch medicos
                 break;
                 
@@ -72,50 +76,45 @@ public class Proyecto_Gestion_Clinica {
                 System.out.println(" 1. Registro de Pacientes");
                 System.out.println(" 2. Buscar Paciente");
                 System.out.print("Seleccione una opcion:");
-                opcionSubmenu = sc.nextInt();
+                opcionSubmenu = ValiacionNumeroPositivo(sc);
                 switch(opcionSubmenu){
         //====== REGISTRO DE PACIENTES =======
-                    case 1: SubEnzabezados("Registro de Paciente");
+                    case 1: SubEncabezados("Registro de Paciente");
                             System.out.print("Cantidad de pacientes a registrar: ");
-                            cantidadPaciente = sc.nextInt();
+                            cantidadRegistro = ValiacionNumeroPositivo(sc);
                             sc.nextLine(); //buffer
                             
-                            for (int i = 0; i < cantidadPaciente; i++) {
+                            for (int i = 0; i < cantidadRegistro; i++) {
                                 System.out.printf("%d Ingrese el nombre el paciente:", i+1);
                                 nombrePaciente = sc.nextLine();
-                                
                                 System.out.printf("Paciente %S: Ingrese el apellido:",nombrePaciente);
                                 apellidoPaciente = sc.nextLine();
-                                
                                 System.out.printf("Paciente %S: Ingrese el genero M/F:",nombrePaciente);
                                 generoPaciente = sc.nextLine().toUpperCase().charAt(0);
-                                
                                 System.out.printf("Paciente %S: Ingrese la edad:",nombrePaciente);
-                                edadPaciente = sc.nextInt();
-                                
+                                edadPaciente = ValiacionNumeroPositivo(sc);
                                 System.out.printf("Paciente %S: Ingrese ID:",nombrePaciente);
-                                idPaciente = sc.nextInt();
+                                idPaciente = ValiacionNumeroPositivo(sc);
                                 sc.nextLine(); //buffer
                                 
-                                listaPacientes[i] = new Paciente(nombrePaciente, apellidoPaciente,generoPaciente,edadPaciente,idPaciente);
+                                listaPacientes[i] = new Paciente(nombrePaciente, apellidoPaciente,idPaciente, generoPaciente,edadPaciente);
                                 System.out.println(" ");
-                                
-                               
-                                
-                                
-                            }//fin for
-   ///////////////                         
-                           for (int i = 0; i < listaPacientes.length; i++) {
+                            }//fin for                
                            
+                            ValidacionArregloNull(listaPacientes);
+                           /*for (int i = 0; i < listaPacientes.length; i++) {
                             if (listaPacientes[i] != null) {
+                            listaPacientes[i].MostrarInformacionPersonas();
                             listaPacientes[i].MostrarInformacionPaciente();
                             }//fin 
-                              }//fin For
+                            }//fin For Validacion Null*/
+                    break;
+                    case 2: SubEncabezados("Buscar Paciente");
                     
-                        
+                    break;
                 }//fin switch pacientes
                 
-                break;   
+                
                 
             case 3:
                 Encabezados("Gestion de Citas");
@@ -138,15 +137,18 @@ public class Proyecto_Gestion_Clinica {
                 break;            
                               
             default:
-                System.out.println("Cierre..");
+                if (opcionMenu>centinelaMenu){
+                System.out.println("Error: Ingrese una opcion Validad");
+                }
+                
             break;   
         }//fin Switch  
          
          
          
       
-     }while(opcionMenu != 7);
-    
+     }while(opcionMenu != centinelaMenu);
+      System.out.println("Pase un feliz dia ('v')/ ");
         
     }//Fin Main
     
@@ -161,14 +163,34 @@ public class Proyecto_Gestion_Clinica {
         System.out.println("===================================");
     }//fin funcion 1
     
-    public static void SubEnzabezados(String mensajeSubencabezado){
+    public static void SubEncabezados(String mensajeSubencabezado){
         String colorVerde = "\u001B[32m";
         String colorReset = "\u001B[0m";
         
         System.out.printf(colorVerde +"--- %s ---\n"+ colorReset,mensajeSubencabezado);
-    }//fin suncion 2
+    }//fin funcion 2
     
+    public static int ValiacionNumeroPositivo(Scanner scan){
+     int numeroTemp = 0;
+     do{
+         numeroTemp = scan.nextInt();
+         if (numeroTemp<=0){ 
+         System.out.println("Error: El numero no puede ser negativo");
+             System.out.println("Ingresarlo nuevamente");
+         }else {   
+         }
+     }while (numeroTemp<0);
+     return numeroTemp; 
+    }//fin funcion ValidacionNumerosPositivos
     
+    public static void ValidacionArregloNull (Personas [] listaTemp){
+    for(int i=0; i<listaTemp.length; i++){
+    if (listaTemp[i] !=null){
+    System.out.println(" Registro Exitoso");
+    listaTemp [i].MostrarInformacion();
+    }
+    }
+    }//fin ValidacionArregloNull 
     
     
 }//Fin Proyecto 
