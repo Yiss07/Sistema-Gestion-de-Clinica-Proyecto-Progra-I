@@ -9,45 +9,34 @@ package proyecto_gestion_clinica;
  *
  * @author Yiss
  */
-public class Paciente {
+public class Paciente extends Personas{
     //== ATRIBUTOS
-    private String nombrePaciente;
-    private String apellidoPaciente;
+    //private String nombrePaciente;
+    //private String apellidoPaciente; 
+//private int idPaciente;
     private char generoPaciente;
     private int edadPaciente;
-    private int idPaciente;
     private String estadoPaciente; //Consulta, Internado, Dado de Alta
     
     
     
-   public Paciente (String nombrePaciente,String apellidoPaciente,char generoPaciente, int edadPaciente, int idPaciente){
-    this.nombrePaciente = nombrePaciente;
-    this.apellidoPaciente = apellidoPaciente;
+   public Paciente( String nombre, String apellido,int id, char generoPaciente, int edadPaciente){
+    //this.nombrePaciente = nombrePaciente;
+    //this.apellidoPaciente = apellidoPaciente;
+    super (nombre, apellido,id);
     this.generoPaciente = generoPaciente;
     this.edadPaciente = edadPaciente;
-    this.idPaciente = idPaciente;   
+    //this.idPaciente = idPaciente;   
     }//fin 
    
-    public String getNombre(){ 
-    return nombrePaciente; 
-    }//fin Get
-
-    public void setNombre(String nombrePaciente){
-    this.nombrePaciente = nombrePaciente;
-    }//fin set
-    
-     public String getApellido(){ 
-    return apellidoPaciente; 
-    }//fin Get
      
-     public void MostrarInformacionPaciente() {
-        System.out.println("ID: "+idPaciente);
-        System.out.println("Nombre: " + nombrePaciente+" " + apellidoPaciente);
+     @Override
+     public void MostrarInformacion() {
+        super.MostrarInformacion();
         System.out.println("Genero: " + generoPaciente);
         System.out.println("Edad: "+edadPaciente);
         System.out.println("");
-       
-    }//fin Funcion
+    }//fin Funcion MontrarInformacion
 
 
 }// Fin CLASS
