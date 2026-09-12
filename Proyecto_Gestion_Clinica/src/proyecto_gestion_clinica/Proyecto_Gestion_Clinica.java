@@ -30,10 +30,16 @@ public class Proyecto_Gestion_Clinica {
      char generoPaciente = 'a';
      int edadPaciente = 0;
      int idPaciente = 0;
+     //Medicos
+     String nombreMedico ="John Doe";
+     String apellidoMedico= "John Doe";
+     String especialidadMedico = "John Doe";
+     int idMedico = 0;
      
      
   //==== ARREGLOS
-       Paciente [] listaPacientes  = new Paciente[50]; 
+       Paciente [] listaPacientes  = new Paciente[50];
+       Medicos [] listaMedicos = new Medicos [50];
      
      
      
@@ -52,7 +58,7 @@ public class Proyecto_Gestion_Clinica {
          System.out.println(" 6. Gestion de Pagos");
          System.out.println(" 7. Salir");
          System.out.print("Seleccione una opcion:");
-         opcionMenu = ValiacionNumeroPositivo(sc);
+         opcionMenu = ValidacionNumeroPositivo(sc);
          
          
         switch(opcionMenu){
@@ -61,28 +67,49 @@ public class Proyecto_Gestion_Clinica {
                 System.out.println(" 1. Registro de Medico");
                 System.out.println(" 2. Buscar Medico");
                 System.out.print("Seleccione una opcion:");
-                opcionSubmenu = ValiacionNumeroPositivo(sc);
+                opcionSubmenu = ValidacionNumeroPositivo(sc);
                 switch(opcionSubmenu){
-        //====== REGISTRO DE MEDICOS =======
-            case 1: 
-                Encabezados("Gestion de Medicos");
-                System.out.println(" 1. Registro de Pacientes");
-                System.out.println(" 2. Buscar Paciente");
-                }//fin switch medicos
-                break;
+    //====== REGISTRO DE MEDICOS =======
+                    case 1: 
+                    SubEncabezados("Registro de Medico");
+                        System.out.println("Cantidad de medicos a registrar: ");
+                        cantidadRegistro = ValidacionNumeroPositivo(sc);
+                        sc.nextLine();// Limpieza de Buffer
+                        
+                        for (int i=0; i<cantidadRegistro;i++){
+                            System.out.printf("%d Ingrese el nombre del Doctor/ra:",i+1);
+                            nombreMedico = sc.nextLine();
+                            System.out.print("Ingrese el apellido: " );
+                            apellidoMedico = sc.nextLine();
+                            System.out.printf("Doctor/ra %S,Ingrese su especializacion: ",apellidoMedico);
+                            especialidadMedico= sc.nextLine();
+                            System.out.printf("Doctor/ra %S,Ingrese su ID:",apellidoMedico);
+                            idMedico=ValidacionNumeroPositivo(sc);
+                            sc.nextLine(); //Limpieza de Buffer
+                            
+                            listaMedicos [i]= new Medicos(nombreMedico,apellidoMedico,idMedico,especialidadMedico);
+                            System.out.println("");
+                        }//fin ciclo for registro Medicos 
+                        
+                        ValidacionArregloNull(listaMedicos);
+                        
+                        
+                   
+                    }//fin switch medicos
+                    break;
                 
             case 2:
                 Encabezados("Gestion de Pacientes");
                 System.out.println(" 1. Registro de Pacientes");
                 System.out.println(" 2. Buscar Paciente");
                 System.out.print("Seleccione una opcion:");
-                opcionSubmenu = ValiacionNumeroPositivo(sc);
+                opcionSubmenu = ValidacionNumeroPositivo(sc);
                 switch(opcionSubmenu){
-        //====== REGISTRO DE PACIENTES =======
+    //====== REGISTRO DE PACIENTES =======
                     case 1: SubEncabezados("Registro de Paciente");
                             System.out.print("Cantidad de pacientes a registrar: ");
-                            cantidadRegistro = ValiacionNumeroPositivo(sc);
-                            sc.nextLine(); //buffer
+                            cantidadRegistro = ValidacionNumeroPositivo(sc);
+                            sc.nextLine(); //Limpieza de Buffer
                             
                             for (int i = 0; i < cantidadRegistro; i++) {
                                 System.out.printf("%d Ingrese el nombre el paciente:", i+1);
@@ -92,16 +119,16 @@ public class Proyecto_Gestion_Clinica {
                                 System.out.printf("Paciente %S: Ingrese el genero M/F:",nombrePaciente);
                                 generoPaciente = sc.nextLine().toUpperCase().charAt(0);
                                 System.out.printf("Paciente %S: Ingrese la edad:",nombrePaciente);
-                                edadPaciente = ValiacionNumeroPositivo(sc);
+                                edadPaciente = ValidacionNumeroPositivo(sc);
                                 System.out.printf("Paciente %S: Ingrese ID:",nombrePaciente);
-                                idPaciente = ValiacionNumeroPositivo(sc);
+                                idPaciente = ValidacionNumeroPositivo(sc);
                                 sc.nextLine(); //buffer
                                 
                                 listaPacientes[i] = new Paciente(nombrePaciente, apellidoPaciente,idPaciente, generoPaciente,edadPaciente);
                                 System.out.println(" ");
                             }//fin for                
                            
-                            ValidacionArregloNull(listaPacientes);
+                           ValidacionArregloNull(listaPacientes);
                            /*for (int i = 0; i < listaPacientes.length; i++) {
                             if (listaPacientes[i] != null) {
                             listaPacientes[i].MostrarInformacionPersonas();
@@ -145,7 +172,6 @@ public class Proyecto_Gestion_Clinica {
         }//fin Switch  
          
          
-         
       
      }while(opcionMenu != centinelaMenu);
       System.out.println("Pase un feliz dia ('v')/ ");
@@ -170,7 +196,7 @@ public class Proyecto_Gestion_Clinica {
         System.out.printf(colorVerde +"--- %s ---\n"+ colorReset,mensajeSubencabezado);
     }//fin funcion 2
     
-    public static int ValiacionNumeroPositivo(Scanner scan){
+    public static int ValidacionNumeroPositivo(Scanner scan){
      int numeroTemp = 0;
      do{
          numeroTemp = scan.nextInt();
@@ -183,7 +209,9 @@ public class Proyecto_Gestion_Clinica {
      return numeroTemp; 
     }//fin funcion ValidacionNumerosPositivos
     
-    public static void ValidacionArregloNull (Personas [] listaTemp){
+  
+    
+    public static void ValidacionArregloNull(Personas[] listaTemp){
     for(int i=0; i<listaTemp.length; i++){
     if (listaTemp[i] !=null){
     System.out.println(" Registro Exitoso");
