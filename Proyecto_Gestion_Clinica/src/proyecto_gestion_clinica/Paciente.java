@@ -19,7 +19,7 @@ public class Paciente extends Personas{
     private String estadoPaciente; //Consulta, Internado, Dado de Alta
     
     
-    
+    //constructor
    public Paciente( String nombre, String apellido,int id, char generoPaciente, int edadPaciente){
     //this.nombrePaciente = nombrePaciente;
     //this.apellidoPaciente = apellidoPaciente;
@@ -29,14 +29,13 @@ public class Paciente extends Personas{
     //this.idPaciente = idPaciente;   
     }//fin 
    
-     
+   //====== FUNCIONES =========  
      @Override
      public void MostrarInformacion() {
-        super.MostrarInformacion();
+        super.MostrarInformacion(); //nombre, apellido, id
         System.out.println("Genero: " + generoPaciente);
         System.out.println("Edad: "+edadPaciente);
         System.out.println("");
     }//fin Funcion MontrarInformacion
-
 
 }// Fin CLASS
