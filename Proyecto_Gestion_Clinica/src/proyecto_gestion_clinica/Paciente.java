@@ -11,9 +11,6 @@ package proyecto_gestion_clinica;
  */
 public class Paciente extends Personas{
     //== ATRIBUTOS
-    //private String nombrePaciente;
-    //private String apellidoPaciente; 
-//private int idPaciente;
     private char generoPaciente;
     private int edadPaciente;
     private String estadoPaciente; //Consulta, Internado, Dado de Alta
@@ -21,12 +18,9 @@ public class Paciente extends Personas{
     
     //constructor
    public Paciente( String nombre, String apellido,int id, char generoPaciente, int edadPaciente){
-    //this.nombrePaciente = nombrePaciente;
-    //this.apellidoPaciente = apellidoPaciente;
     super (nombre, apellido,id);
     this.generoPaciente = generoPaciente;
     this.edadPaciente = edadPaciente;
-    //this.idPaciente = idPaciente;   
     }//fin 
    
    //====== FUNCIONES =========  
@@ -35,7 +29,26 @@ public class Paciente extends Personas{
         super.MostrarInformacion(); //nombre, apellido, id
         System.out.println("Genero: " + generoPaciente);
         System.out.println("Edad: "+edadPaciente);
-        System.out.println("");
     }//fin Funcion MontrarInformacion
+     
+     
+  public String GetNombre(){
+  return this.nombre;
+   }//fin GetNombre
 
+  public String GetApellido(){
+  return this.apellido;
+  }//fin GetApellido
+  
+  public int GetId(){
+  return this.id;
+  }//fin GetId
+  
+  public int GetGenero(){
+  return this.generoPaciente;
+  }//fin GetGenero
+  
+  public int GetEdad(){
+  return this.edadPaciente;
+  }//fin GetEdad
 }// Fin CLASS
