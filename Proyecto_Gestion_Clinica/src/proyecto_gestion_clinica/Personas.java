@@ -19,10 +19,24 @@ public class Personas {
         this.apellido = apellido;
         this.id = id;
 }
-    
+    // ======  FUNCIONES ========
     public void MostrarInformacion() {
         System.out.println("ID: "+id);
         System.out.println("Nombre: " + nombre+" " + apellido);
-        
-    }//fin Funcion MontrarInformacionPaciente
+        }//fin Funcion MontrarInformacionPaciente  
+
+  public String GetNombre(){
+  return this.nombre;
+  }//fin GetNombre
+  
+  public String GetApellido(){
+  return this.apellido;
+  }//fin GetApellido
+  
+  public int GetId(){
+  return this.id;
+  }//fin GetId
+  
+  
+
 }//fin Class
