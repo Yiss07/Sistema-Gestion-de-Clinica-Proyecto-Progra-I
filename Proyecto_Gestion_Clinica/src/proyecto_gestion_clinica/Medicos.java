@@ -10,26 +10,31 @@ package proyecto_gestion_clinica;
  */
 public class Medicos extends Personas {
     //ATRIBUTOS
-    // private String nombreMedico;
-    //private String apellidoMedico;
     private String  especialidadMedico;
-    //private int idMedico;
+
     
     public Medicos( String nombre, String apellido,int id,String especialidadMedico){
-    //this.nombrePaciente = nombrePaciente;
-    //this.apellidoPaciente = apellidoPaciente;
+
     super (nombre, apellido,id);
     this.especialidadMedico = especialidadMedico;
-    //this.idPaciente = idPaciente;   
     }//fin 
     
     @Override
      public void MostrarInformacion() {
-        super.MostrarInformacion();
+        super.MostrarInformacion();//nombre, apellido, id
         System.out.println("Escpecialidad: " + especialidadMedico);
-        System.out.println("");
     }//fin Funcion MontrarInformacion
 
-    
+public String GetNombre(){
+  return this.nombre;
+}//fin GetNombre
+
+public String GetApellido(){
+  return this.apellido;
+  }//fin GetApellido
+  
+  public int GetId(){
+  return this.id;
+  }//fin GetId
     
 }//FIN CLASS
