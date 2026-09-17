@@ -36,14 +36,17 @@ public class Proyecto_Gestion_Clinica {
      char generoPaciente = 'a';
      int edadPaciente = 0;
      int idPaciente = 0;
+     int posicionArregloPaciente = 0;
      Personas pacienteSeleccionado;
      //Medicos
+     int posicionArregloMedico = 0;
      String nombreMedico ="John Doe";
      String apellidoMedico= "John Doe";
      String especialidadMedico = "John Doe";
      int idMedico = 0;
      Personas medicoAsignado;
      //Citas 
+     int posicionArregloCita = 0;
      int idCita = 0;
      String textoFechaCita = "John Doe";
      DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -53,6 +56,7 @@ public class Proyecto_Gestion_Clinica {
       DateTimeFormatter formatoFechaBuscar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
      boolean fechaEncontrada = false;
      //HM HistorialMedico
+     int posicionArregloHM = 0;
      int posicionArregloHistorial =-1;
      String sintomasHM = "John Doe";
      String diagnosticoHM = "John Doe";
@@ -95,8 +99,11 @@ public class Proyecto_Gestion_Clinica {
                         System.out.println("Cantidad de medicos a registrar: ");
                         cantidadRegistro = ValidacionNumeroPositivo(sc);
                         sc.nextLine();// Limpieza de Buffer
-                        
-                        for (int i=0; i<cantidadRegistro;i++){                         
+                    
+                        for (int i=0; i<cantidadRegistro;i++){
+                            while(posicionArregloMedico<listaMedicos.length && listaMedicos[posicionArregloMedico] != null){
+                            posicionArregloMedico++;
+                            }//while para nuevo registro
                             System.out.printf("%d Ingrese el nombre del Doctor/ra:",i+1);
                             nombreMedico = sc.nextLine();
                             System.out.print("Ingrese el apellido: " );
@@ -108,7 +115,7 @@ public class Proyecto_Gestion_Clinica {
                             sc.nextLine(); //Limpieza de Buffer
                             //guardar arreglo posicion nueva
                             
-                            listaMedicos [i]= new Medicos(nombreMedico,apellidoMedico,idMedico,especialidadMedico);
+                            listaMedicos [posicionArregloMedico]= new Medicos(nombreMedico,apellidoMedico,idMedico,especialidadMedico);
                             System.out.println("");   
                         }//fin ciclo for registro Medicos 
                         ValidacionArregloNull(listaMedicos);
@@ -137,7 +144,11 @@ public class Proyecto_Gestion_Clinica {
                             cantidadRegistro = ValidacionNumeroPositivo(sc);
                             sc.nextLine(); //Limpieza de Buffer
                             
+                            
                             for (int i = 0; i < cantidadRegistro; i++) {
+                                while(posicionArregloPaciente<listaPacientes.length && listaPacientes[posicionArregloPaciente] != null){
+                                posicionArregloPaciente++;
+                                }//while para nuevo registro 
                                 System.out.printf("%d Ingrese el nombre del paciente:", i+1);
                                 nombrePaciente = sc.nextLine();
                                 System.out.printf("Paciente %S: Ingrese el apellido:",nombrePaciente);
@@ -150,7 +161,7 @@ public class Proyecto_Gestion_Clinica {
                                 idPaciente = ValidacionNumeroPositivo(sc);
                                 sc.nextLine(); //buffer
        
-                                listaPacientes[i] = new Paciente(nombrePaciente, apellidoPaciente,idPaciente, generoPaciente,edadPaciente);
+                                listaPacientes[posicionArregloPaciente] = new Paciente(nombrePaciente, apellidoPaciente,idPaciente, generoPaciente,edadPaciente);
                                 System.out.println(" ");
                             }//fin for registro Pacientes    
                             ValidacionArregloNull(listaPacientes);
@@ -178,6 +189,9 @@ public class Proyecto_Gestion_Clinica {
                             System.out.print("Cantidad de citas a registrar: ");
                             cantidadRegistro = ValidacionNumeroPositivo(sc);
                             sc.nextLine();//limpieza de Buffer
+                            while(posicionArregloCita<listaCitas.length && listaCitas[posicionArregloCita] != null){
+                            posicionArregloCita++;
+                                    }//while para nuevo registro 
                             for( int i = 0; i <cantidadRegistro; i++){
                                 System.out.println("\n-- Registro de Cita "+(i+1)+" --");
                                 fechaHoraCita = null;
@@ -228,8 +242,8 @@ public class Proyecto_Gestion_Clinica {
                                 
                                 sc.nextLine(); //Limpieza de buffer
                               
-                                listaCitas[i] = new Citas(pacienteSeleccionado,medicoAsignado,idCita,fechaHoraCita);
-                                listaCitas[i].MostrarInformacion();
+                                listaCitas[posicionArregloCita] = new Citas(pacienteSeleccionado,medicoAsignado,idCita,fechaHoraCita);
+                                listaCitas[posicionArregloCita].MostrarInformacion();
                                 }// Fin for registro Citas
                                 System.out.println("");
                                 break;
@@ -247,10 +261,8 @@ public class Proyecto_Gestion_Clinica {
                             System.out.println("\n===== CITAS DEL " + textoFechaBuscar + " =====");
                             for (int i = 0; i < listaCitas.length; i++) {
                                 
-                            if (listaCitas[i] != null &&
-                            listaCitas[i].GetFechaHoraCita() != null) {
-                            LocalDate fechaCita =
-                            listaCitas[i].GetFechaHoraCita().toLocalDate();
+                            if (listaCitas[i] != null && listaCitas[i].GetFechaHoraCita() != null) {
+                            LocalDate fechaCita = listaCitas[i].GetFechaHoraCita().toLocalDate();
                             
                             if (fechaCita.equals(fechaBuscarCita)) {
                             listaCitas[i].MostrarInformacion();
@@ -281,6 +293,9 @@ public class Proyecto_Gestion_Clinica {
                             cantidadRegistro = ValidacionNumeroPositivo(sc);
                             sc.nextLine();//limpieza de Buffer
                             for (int i = 0; i < cantidadRegistro; i++) {
+                            while(posicionArregloHM<listaHistorialMedico.length && listaHistorialMedico[posicionArregloHM] != null){
+                            posicionArregloHM++;
+                            }//while para nuevo registro
                             System.out.print("Ingrese nombre Paciente registrado: ");
                             pacienteSeleccionado = BuscadorNombreCita(listaPacientes,sc);   
                                 if (pacienteSeleccionado == null) {
@@ -300,8 +315,8 @@ public class Proyecto_Gestion_Clinica {
                             System.out.println("Ingrese observaciones: ");
                             observacionesHM = sc.nextLine();
                             
-                            listaHistorialMedico[i] = new HistorialMedico(pacienteSeleccionado,medicoAsignado,sintomasHM,diagnosticoHM,observacionesHM);
-                            listaHistorialMedico[i].MostrarInformacion();
+                            listaHistorialMedico[posicionArregloHM] = new HistorialMedico(pacienteSeleccionado,medicoAsignado,sintomasHM,diagnosticoHM,observacionesHM);
+                            listaHistorialMedico[posicionArregloHM].MostrarInformacion();
                             }//fin for registro    
                     break;
                     case 2:
