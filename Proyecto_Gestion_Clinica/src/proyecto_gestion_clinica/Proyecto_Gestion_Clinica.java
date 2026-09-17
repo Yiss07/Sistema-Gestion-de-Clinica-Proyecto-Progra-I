@@ -58,12 +58,15 @@ public class Proyecto_Gestion_Clinica {
      String diagnosticoHM = "John Doe";
      String observacionesHM = "John Doe";
      boolean PacienteEncontrado = false;
+     //Internaciones
+     int diasInternos = 0;
      
   //==== ARREGLOS
        Paciente [] listaPacientes  = new Paciente[50];
        Medicos [] listaMedicos = new Medicos [50];
        Citas [] listaCitas = new Citas[50];
        HistorialMedico [] listaHistorialMedico = new HistorialMedico [50];
+       Internaciones[]listaInternaciones = new Internaciones[50];
    
 //=============    MENU PRINCIPAL  =============
      do{
@@ -194,7 +197,7 @@ public class Proyecto_Gestion_Clinica {
                                     }//fin for verficador de Fecha y Hora registrada
                                     
                                     if (fechaHoraRepetida) {
-                                    System.out.println("ALERTA: Ya existe una cita en esa fecha y hora.");
+                                    System.out.println("ALERTA: Ya existe una cita en esa hora.");
                                      System.out.println("Ingrese una fecha y hora diferente.");
                                      fechaHoraCita = null;
                                     }//fin if Alerta
